@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView(
+        child: Column(
           children: [
             Text("Result = ", style: const TextStyle(fontSize: 30)),
             textField(FirstField, "Enter First Number"),
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
 Widget textField(TextEditingController controller, String labelText) {
   return Container(
     margin: const EdgeInsets.all(10),
-    padding: const EdgeInsets.all(5),
+    padding: const EdgeInsets.all(10),
     child: TextFormField(
       controller: controller,
       validator: (value) {
@@ -106,6 +106,8 @@ Widget textField(TextEditingController controller, String labelText) {
 
 Widget button(VoidCallback onPressed, String name) {
   return Container(
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
     child: ElevatedButton(
         onPressed: onPressed,
         child: Text(name)),
