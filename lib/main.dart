@@ -39,26 +39,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double result = 0;
   var FirstField = TextEditingController();
   var SecondField = TextEditingController();
+  var FieldKey = GlobalKey<FormState>();
 
   void add() {
     setState(() {
+      result = double.parse(FirstField.text) + double.parse(SecondField.text);
     });
   }
 
   void substract() {
     setState(() {
+      result = double.parse(FirstField.text) - double.parse(SecondField.text);
     });
   }
 
   void multiply() {
     setState(() {
+      result = double.parse(FirstField.text) * double.parse(SecondField.text);
     });
   }
 
   void divide() {
     setState(() {
+      result = double.parse(FirstField.text) / double.parse(SecondField.text);
     });
   }
 
@@ -69,17 +75,20 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          children: [
-            Text("Result = ", style: const TextStyle(fontSize: 30)),
-            textField(FirstField, "Enter First Number"),
-            textField(SecondField, "Enter Second Number"),
-            button(add, "Add"),
-            button(substract, "Substract"),
-            button(multiply, "Multiply"),
-            button(divide, "Divide"),
-          ],
-        ),
+        child: Form(
+          key: FieldKey,
+          child: Column(
+            children: [
+              Text("Result = $result", style: const TextStyle(fontSize: 30)),
+              textField(FirstField, "Enter First Number"),
+              textField(SecondField, "Enter Second Number"),
+              button(add, "Add"),
+              button(substract, "Substract"),
+              button(multiply, "Multiply"),
+              button(divide, "Divide"),
+            ],
+          ),
+        ),    
       ),
     );
   }
@@ -91,12 +100,6 @@ Widget textField(TextEditingController controller, String labelText) {
     padding: const EdgeInsets.all(10),
     child: TextFormField(
       controller: controller,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Mohon Masukkan Angka';
-        }
-        return null;
-      },
       decoration: InputDecoration(
           labelText: labelText,
           ),
